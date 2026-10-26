@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import "./App.css";
 
 function App() {
-  const [glasses,setGlasses] = useState(0);
+  const [glasses, setGlasses] = useState(() => {
+    return Number(localStorage.getItem("glasses")) || 0;
+  });
   const [goals, setGoals] = useState(8);
+
+  const [goalInput, setGoalInput] = useState();
+
+  useEffect(() => {
+    localStorage.setItem("glasses", glasses);
+  }, [glasses]);
+
+  useEffect(() => {
+    document.title = `💧 ${glasses} / ${goals}`;
+  }, [glasses, goals]);
+  
+  
 
   return (
     <div>
@@ -15,7 +29,7 @@ function App() {
       <button onClick={() => setGlasses(0)}>Reset</button>
       <p>Daily goal: {glasses} / 8 glasses</p>
       <progress value={glasses} max={8} />
-      {glasses >= 8 && <p>💦💧🌊 Daily goal reeached!</p>}
+      {glasses >= 8 && <p>💦💧🌊🎉🎉 Daily goal reeached!</p>}
     </div>
   );
   
