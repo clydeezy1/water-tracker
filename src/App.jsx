@@ -10,6 +10,8 @@ function App() {
       <h1>Water Tracker</h1>
       <p>Glasses consumed: {glasses}</p>
       <p>Daily goal: {goals} glasses</p>
+      <button onClick={() => setGlasses(glasses + 1)}>Add Glass
+      </button>
     </div>
   );
   
